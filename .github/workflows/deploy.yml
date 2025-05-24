@@ -30,7 +30,7 @@ jobs:
 
       - name: package lambda functions
         run: |
-          zip -r ./lambda_function.zip ./lambda/main.py
+          zip -r ./lambda_function.zip ./lambda/app.py
 
       - name: Terraform init
         run: terraform init
