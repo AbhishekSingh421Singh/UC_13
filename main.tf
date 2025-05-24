@@ -78,6 +78,7 @@ resource "aws_apigatewayv2_authorizer" "cognito_auth" {
     audience = [aws_cognito_user_pool_client.client.id]
     issuer = "https://${aws_cognito_user_pool_domain.domain.domain}.auth.${var.aws_region}.amazoncognito.com"
   }
+  depends_on = [aws_cognito_user_pool_domain.domain]
 }
 
 resource "aws_iam_role" "lambda_exec_role" {
