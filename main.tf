@@ -16,6 +16,8 @@ resource "aws_apigatewayv2_route" "default_route" {
   api_id    = aws_apigatewayv2_api.http_api.id
   route_key = "GET /"
   target    = "integrations/${aws_apigatewayv2_integration.lambda_integration.id}"
+  authorization_type = "JWT"
+  authorizer_id      = aws_apigatewayv2_authorizer.cognito_auth.id
 }
 
 resource "aws_apigatewayv2_stage" "default_stage" {
@@ -66,6 +68,18 @@ resource "aws_cognito_user_pool_domain" "domain" {
   domain       = var.domain_prefix
   user_pool_id = aws_cognito_user_pool.this.id
 }
+
+resource "aws_apigatewayv2_authorizer" "cognito_auth" {
+  name                       = "cognito-authorizer"
+  api_id                     = aws_apigatewayv2_api.http_api.id
+  authorizer_type            = "JWT"
+  identity_sources           = ["$request.header.Authorization"]
+  jwt_configuration {
+    audience = [aws_cognito_user_pool_client.client.id]
+    issuer   = "https://${aws_cognito_user_pool_domain.domain.domain}.auth.${var.aws_region}.amazoncognito.com"
+  }
+}
+
 resource "aws_iam_role" "lambda_exec_role" {
   name = var.lambda_role_name
 
