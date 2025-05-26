@@ -25,21 +25,21 @@ jobs:
         with:
           terraform_version: '1.11.4'
           
-      # - name: Terraform formtat
-      #   run: terraform fmt
+      - name: Terraform formtat
+        run: terraform fmt
 
-      # - name: package lambda functions
-      #   run: |
-      #     zip -r ./lambda_function.zip ./lambda/app.py
+      - name: package lambda functions
+        run: |
+          zip -r ./lambda_function.zip ./lambda/app.py
 
       - name: Terraform init
         run: terraform init
         
-      # - name: Terraform validate 
-      #   run: terraform validate 
+      - name: Terraform validate 
+        run: terraform validate 
 
-      # - name: Terraform plan
-      #   run: terraform plan
+      - name: Terraform plan
+        run: terraform plan
         
       # - name: Install tflint
       #   run: |
@@ -73,9 +73,9 @@ jobs:
       #      output-file: README.md
       #      output-method: replace
           
-      # - name: Terraform Apply
-      #   run: terraform apply -auto-approve
+      - name: Terraform Apply
+        run: terraform apply -auto-approve
 
-      - name: Terraform destroy
-        run: terraform destroy -auto-approve
+      # - name: Terraform destroy
+      #   run: terraform destroy -auto-approve
         
