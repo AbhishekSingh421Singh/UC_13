@@ -7,7 +7,7 @@ variable "function_name" {
 }
 
 variable "handler" {
-  default = "lambda_function.lambda_handler"
+  default = "app.lambda_handler"
 }
 
 variable "runtime" {
