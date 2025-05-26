@@ -76,9 +76,9 @@ jobs:
       #     git diff --cached --quiet || git commit -m "Update Terraform docs"
       #     git push
 
-      # - name: Terraform Apply
-      #   run: terraform apply -auto-approve
+      - name: Terraform Apply
+        run: terraform apply -auto-approve
 
       #Optional: Uncomment to destroy infra after use
-      - name: Terraform destroy
-        run: terraform destroy -auto-approve
+      # - name: Terraform destroy
+      #   run: terraform destroy -auto-approve
